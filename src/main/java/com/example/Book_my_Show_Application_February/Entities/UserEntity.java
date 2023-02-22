@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 @Data
@@ -31,5 +34,7 @@ public class UserEntity {
 
     private String address;
 
+    @OneToMany(mappedBy = "userEntity",cascade = CascadeType.ALL)
+    private List<TicketEntity> bookedTickets = new ArrayList<>();
 
 }

@@ -18,6 +18,7 @@ public class UserController {
     @PostMapping("/add")
     public String addUser(@RequestBody UserEntryDto userEntryDto){
 
+        return "";
 
     }
 }

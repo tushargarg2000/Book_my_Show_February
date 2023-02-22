@@ -10,7 +10,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="shows")
@@ -34,6 +36,25 @@ public class ShowEntity {
 
     @UpdateTimestamp
     private Date updatedOn;
+
+
+    //This is child wrt to the movieEntity
+    @ManyToOne
+    @JoinColumn
+    private MovieEntity movieEntity;
+
+
+    @ManyToOne
+    @JoinColumn
+    private TheaterEntity theaterEntity;
+
+
+    //Show is parent wrt to ticket
+    @OneToMany(mappedBy = "showEntity",cascade = CascadeType.ALL)
+    private List<TicketEntity> listOfBookedTickets = new ArrayList<>();
+
+    @OneToMany(mappedBy = "showEntity",cascade = CascadeType.ALL)
+    private List<ShowSeatEntity> listOfShowSeats = new ArrayList<>();
 
 
 }

@@ -25,6 +25,7 @@ public class UserService {
 //        userEntity.setAge(userEntryDto.getAge())
 //                userEntity.setAddress()
 
+        //creating the objects
         UserEntity userEntity = UserEntity.builder().age(userEntryDto.getAge()).name(userEntryDto.getName())
                 .address(userEntryDto.getAddress()).email(userEntryDto.getEmail()).mobNo(userEntryDto.getMobNo())
                 .build();
@@ -34,7 +35,6 @@ public class UserService {
         //This is to set all of the attributes in 1 go.
     }
 
-    UserEntity convertEntryToDto()
 
 
 }

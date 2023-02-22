@@ -6,6 +6,9 @@ import com.example.Book_my_Show_Application_February.Enums.Language;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "movies")
 @Data
@@ -28,6 +31,10 @@ public class MovieEntity {
 
     @Enumerated(value = EnumType.STRING)
     private Genre genre;
+
+    //this is parent wrt to shows
+    @OneToMany(mappedBy = "movieEntity",cascade = CascadeType.ALL)
+    private List<ShowEntity> showEntityList = new ArrayList<>();
 
 
 
