@@ -4,7 +4,10 @@ package com.example.Book_my_Show_Application_February.Entities;
 import com.example.Book_my_Show_Application_February.Enums.Genre;
 import com.example.Book_my_Show_Application_February.Enums.Language;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +15,9 @@ import java.util.List;
 @Entity
 @Table(name = "movies")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class MovieEntity {
 
     @Id

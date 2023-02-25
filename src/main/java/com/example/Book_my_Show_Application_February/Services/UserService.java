@@ -4,6 +4,7 @@ package com.example.Book_my_Show_Application_February.Services;
 import com.example.Book_my_Show_Application_February.Entities.UserEntity;
 import com.example.Book_my_Show_Application_February.EntryDtos.UserEntryDto;
 import com.example.Book_my_Show_Application_February.Repository.UserRepository;
+import com.example.Book_my_Show_Application_February.convertors.UserConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,25 +15,14 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public void addUser(UserEntryDto userEntryDto){
+    public String addUser(UserEntryDto userEntryDto)throws Exception,NullPointerException{
 
-        //Here we need to convert and save.
-        /*
-            Old method : create an object and set attributes.
-
-         */
-//
-//        userEntity.setAge(userEntryDto.getAge())
-//                userEntity.setAddress()
-
-        //creating the objects
-        UserEntity userEntity = UserEntity.builder().age(userEntryDto.getAge()).name(userEntryDto.getName())
-                .address(userEntryDto.getAddress()).email(userEntryDto.getEmail()).mobNo(userEntryDto.getMobNo())
-                .build();
-
+        UserEntity userEntity = UserConvertor.convertDtoToEntity(userEntryDto);
 
         userRepository.save(userEntity);
-        //This is to set all of the attributes in 1 go.
+
+        return "User Added successfully";
+
     }
 
 

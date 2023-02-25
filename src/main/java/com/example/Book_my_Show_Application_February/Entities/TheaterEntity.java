@@ -1,6 +1,8 @@
 package com.example.Book_my_Show_Application_February.Entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +13,8 @@ import java.util.List;
 @Table(name = "theaters")
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class TheaterEntity {
 
     @Id
