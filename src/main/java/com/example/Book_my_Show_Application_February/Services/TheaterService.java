@@ -5,6 +5,7 @@ import com.example.Book_my_Show_Application_February.Entities.TheaterEntity;
 import com.example.Book_my_Show_Application_February.Entities.TheaterSeatEntity;
 import com.example.Book_my_Show_Application_February.EntryDtos.TheaterEntryDto;
 import com.example.Book_my_Show_Application_February.Enums.SeatType;
+import com.example.Book_my_Show_Application_February.Repository.TheaterRepository;
 import com.example.Book_my_Show_Application_February.Repository.TheaterSeatRepository;
 import com.example.Book_my_Show_Application_February.convertors.TheaterConvertors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +21,32 @@ public class TheaterService {
     TheaterSeatRepository theaterSeatRepository;
 
 
-    public String addTheater(TheaterEntryDto theaterEntryDto){
+    @Autowired
+    TheaterRepository theaterRepository;
+
+    public String addTheater(TheaterEntryDto theaterEntryDto)throws Exception{
+
+
+        //Do some validations :
+        if(theaterEntryDto.getName()==null||theaterEntryDto.getLocation()==null){
+            throw new Exception("Name and location should valid");
+        }
 
         TheaterEntity theaterEntity = TheaterConvertors.convertDtoToEntity(theaterEntryDto);
-
         List<TheaterSeatEntity> theaterSeatEntityList = createTheaterSeats(theaterEntryDto,theaterEntity);
 
-        return "";
+        theaterEntity.setTheaterSeatEntityList(theaterSeatEntityList);
+        theaterRepository.save(theaterEntity);
+
+        return "Theater Added successfully";
     }
 
     private List<TheaterSeatEntity> createTheaterSeats(TheaterEntryDto theaterEntryDto,TheaterEntity theaterEntity){
-
 
         int noClassicSeats = theaterEntryDto.getClassicSeatsCount();
         int noPremiumSeats = theaterEntryDto.getPremiumSeatsCount();
 
         List<TheaterSeatEntity> theaterSeatEntityList = new ArrayList<>();
-
 
         //Created the classic Seats
         for(int count = 1;count<=noClassicSeats;count++){
@@ -57,11 +67,9 @@ public class TheaterService {
                     seatType(SeatType.PREMIUM).seatNo(count+"P").theaterEntity(theaterEntity).build();
 
             theaterSeatEntityList.add(theaterSeatEntity);
-
         }
 
-        theaterSeatRepository.saveAll(theaterSeatEntityList);
-
+        //Not saving the child here
         return theaterSeatEntityList;
 
     }
