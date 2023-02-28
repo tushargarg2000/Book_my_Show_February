@@ -20,6 +20,7 @@ public class ShowController {
     @PostMapping("/add")
     public ResponseEntity<String> addShow(@RequestBody ShowEntryDto showEntryDto){
 
+        return null;
 
     }
 

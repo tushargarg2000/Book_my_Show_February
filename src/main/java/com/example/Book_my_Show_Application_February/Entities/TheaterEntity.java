@@ -1,6 +1,6 @@
 package com.example.Book_my_Show_Application_February.Entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

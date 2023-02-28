@@ -1,7 +1,7 @@
 package com.example.Book_my_Show_Application_February.EntryDtos;
 
 
-import jakarta.persistence.Column;
+import javax.persistence.*;
 import lombok.Data;
 import lombok.NonNull;
 

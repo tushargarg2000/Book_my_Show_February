@@ -2,7 +2,7 @@ package com.example.Book_my_Show_Application_February.Entities;
 
 
 import com.example.Book_my_Show_Application_February.Enums.SeatType;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import jdk.jfr.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
