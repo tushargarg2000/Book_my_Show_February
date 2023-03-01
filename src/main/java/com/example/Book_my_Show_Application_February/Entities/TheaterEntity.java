@@ -31,7 +31,7 @@ public class TheaterEntity {
     private List<TheaterSeatEntity> theaterSeatEntityList = new ArrayList<>();
 
 
-    @OneToMany(mappedBy = "theaterEntity",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "theaterEntity",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<ShowEntity> showEntityList = new ArrayList<>();
 
 

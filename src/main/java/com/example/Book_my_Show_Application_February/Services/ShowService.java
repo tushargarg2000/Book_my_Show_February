@@ -5,6 +5,7 @@ import com.example.Book_my_Show_Application_February.Entities.*;
 import com.example.Book_my_Show_Application_February.EntryDtos.ShowEntryDto;
 import com.example.Book_my_Show_Application_February.Enums.SeatType;
 import com.example.Book_my_Show_Application_February.Repository.MovieRepository;
+import com.example.Book_my_Show_Application_February.Repository.ShowRepository;
 import com.example.Book_my_Show_Application_February.Repository.TheaterRepository;
 import com.example.Book_my_Show_Application_February.convertors.Showconvertors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class ShowService {
     @Autowired
     TheaterRepository theaterRepository;
 
+    @Autowired
+    ShowRepository showRepository;
+
     public String addShow(ShowEntryDto showEntryDto)
     {
         //1. Create a showEntity
@@ -38,7 +42,6 @@ public class ShowService {
         showEntity.setMovieEntity(movieEntity);
         showEntity.setTheaterEntity(theaterEntity);
 
-
         //Pending attributes the listOfShowSeatsEnity
 
         List<ShowSeatEntity> seatEntityList = createShowSeatEntity(showEntryDto,showEntity);
@@ -48,15 +51,14 @@ public class ShowService {
 
         //Now we  also need to update the parent entities
 
-        List<ShowEntity> showEntityList = movieEntity.getShowEntityList();
-        showEntityList.add(showEntity);
-        movieEntity.setShowEntityList(showEntityList);
+
+        showEntity = showRepository.save(showEntity);
+
+        movieEntity.getShowEntityList().add(showEntity);
+        theaterEntity.getShowEntityList().add(showEntity);
+
 
         movieRepository.save(movieEntity);
-
-        List<ShowEntity> showEntityList1 = theaterEntity.getShowEntityList();
-        showEntityList1.add(showEntity);
-        theaterEntity.setShowEntityList(showEntityList1);
 
         theaterRepository.save(theaterEntity);
 

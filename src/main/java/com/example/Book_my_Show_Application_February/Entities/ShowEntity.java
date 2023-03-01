@@ -54,7 +54,6 @@ public class ShowEntity {
     @JoinColumn
     private TheaterEntity theaterEntity;
 
-
     //Show is parent wrt to ticket
     @OneToMany(mappedBy = "showEntity",cascade = CascadeType.ALL)
     private List<TicketEntity> listOfBookedTickets = new ArrayList<>();

@@ -40,10 +40,8 @@ public class MovieEntity {
     private Genre genre;
 
     //this is parent wrt to shows
-    @OneToMany(mappedBy = "movieEntity",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "movieEntity",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<ShowEntity> showEntityList = new ArrayList<>();
-
-
 
 
 }
