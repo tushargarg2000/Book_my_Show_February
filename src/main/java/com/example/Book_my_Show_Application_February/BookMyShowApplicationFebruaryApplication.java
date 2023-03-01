@@ -7,7 +7,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 @SpringBootApplication
 @EnableSwagger2
-
 public class BookMyShowApplicationFebruaryApplication {
 
 	public static void main(String[] args) {
